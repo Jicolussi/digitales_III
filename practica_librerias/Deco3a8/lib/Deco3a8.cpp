@@ -30,5 +30,4 @@ void dec3a8(int I0, int I1, int I2){
     if(I0==1 & I1==1 & I2==1){
         GPIOB->BSRR |=(1<<7);
     }
-    
 }    

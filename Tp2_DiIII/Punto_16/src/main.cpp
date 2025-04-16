@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include <Arduino.h>
 #include <stm32f103xb.h>
 void setup() {
@@ -22,4 +23,19 @@ uint16_t est=GPIOB->IDR & (1<<0);
                      | GPIO_BSRR_BR4 | GPIO_BSRR_BS5
                      | GPIO_BSRR_BR6 | GPIO_BSRR_BS7;
     }
+=======
+#include <Arduino.h>
+#include <stm32f103xb.h>
+void setup() {
+RCC->APB2ENR|=RCC_APB2ENR_IOPAEN_Msk;
+RCC->APB2ENR|=RCC_APB2ENR_IOPBEN_Msk;
+GPIOB->CRL=(0x11111111);
+GPIOB->CRH=(0x11111111);
+GPIOA->CRL=(0x44444444);
+GPIOA->CRH=(0x44444444);
+}
+
+void loop() {
+
+>>>>>>> a78c6f631c14a108d9a3b9cc7c0b434d3865c121
 }
