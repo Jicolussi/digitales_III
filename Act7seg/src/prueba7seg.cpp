@@ -1,8 +1,8 @@
-#include <arduino.h>
-#include "dec7seg.h"
+#include <Arduino.h>
+#include "sieteSeg.h"
 
 void setup() {
-  void dec7seg_init();
+  dec7seg_init();
 }
 
 void loop() {
