@@ -1,61 +1,21 @@
 #include <Arduino.h>
 #include "PasoN.h"
 
-void PasoN_init(){
-    RCC-> APB2ENR |= RCC_APB2ENR_IOPAEN;
-
-    GPIOA -> CRL &= ~GPIO_CRL_CNF0;
-    GPIOA -> CRL |= GPIO_CRL_MODE0_0;
-
-    GPIOA -> CRL &= ~GPIO_CRL_CNF1;
-    GPIOA -> CRL |= GPIO_CRL_MODE1_0;
-
-    GPIOA -> CRL &= ~GPIO_CRL_CNF2;
-    GPIOA -> CRL |= GPIO_CRL_MODE2_0;
-
-    GPIOA -> CRL &= ~GPIO_CRL_CNF3;
-    GPIOA -> CRL |= GPIO_CRL_MODE3_0;
-
+void PasoN_init(int IN0, int IN1, int IN2, int IN3){
+    RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
+    int pines[4]{IN0, IN1, IN2, IN3};
+    for(int i=0; i<4; i++){
+        if(pines[i]<8){
+            GPIOA->CRL &=~(1<< pines[i] * 4)&~(1<< (pines[i] * 4 )+ 1) &~ (1<<(pines[i]*4+2)) &~ (1<<(pines[i]*4+3));
+            GPIOA->CRL |=(1<<pines[i]);
+        }else{
+            GPIOA->CRH &=(1<<pines[i]%8*4) &~ (1<<(pines[i]%8*4)+1) &~ (1<<(pines[i]%8*4)+2) &~ (1<<(pines[i]%8*4)+3);
+            GPIOA->CRH |=(1<<pines[i]);
+        } 
+    }
 }
 
 void PasoN(int pasos){
 
-    switch (pasos)
-    {
-
-    case 1:
-        GPIOA->BSRR |= GPIO_BSRR_BS0;
-        GPIOA->BSRR |= GPIO_BSRR_BS1;
-        GPIOA->BSRR |= GPIO_BSRR_BR2;
-        GPIOA->BSRR |= GPIO_BSRR_BR3;
-    break;
-
-    case 2:
-        GPIOA->BSRR |= GPIO_BSRR_BR0;
-        GPIOA->BSRR |= GPIO_BSRR_BS1;
-        GPIOA->BSRR |= GPIO_BSRR_BS2;
-        GPIOA->BSRR |= GPIO_BSRR_BR3;
-    break;
-
-    case 3:
-        GPIOA->BSRR |= GPIO_BSRR_BR0;
-        GPIOA->BSRR |= GPIO_BSRR_BR1;
-        GPIOA->BSRR |= GPIO_BSRR_BS2;
-        GPIOA->BSRR |= GPIO_BSRR_BS3;
-    break;
-
-    case 4:
-        GPIOA->BSRR |= GPIO_BSRR_BS0;
-        GPIOA->BSRR |= GPIO_BSRR_BR1;
-        GPIOA->BSRR |= GPIO_BSRR_BR2;
-        GPIOA->BSRR |= GPIO_BSRR_BS3;
-
-    default:
-        GPIOA->BSRR |= GPIO_BSRR_BR0;
-        GPIOA->BSRR |= GPIO_BSRR_BR1;
-        GPIOA->BSRR |= GPIO_BSRR_BR2;
-        GPIOA->BSRR |= GPIO_BSRR_BR3;
-    break;
-
-    }
+    
 }

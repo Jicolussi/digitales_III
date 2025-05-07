@@ -4,16 +4,16 @@
 void MotorPaP_init(){
     RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
 
-    GPIOA->CRL &= ~GPIO_CRL_CNF0;
-    GPIOA->CRL |=  GPIO_CRL_MODE0_0;
+    GPIOA->CRL &= ~GPIO_CRL_CNF0 & ~GPIO_CRL_MODE0; //borro los bits del registro del pin 0
+    GPIOA->CRL |=  GPIO_CRL_MODE0_0; // pongo los unos que quiero
 
-    GPIOA->CRL &= ~GPIO_CRL_CNF1;
+    GPIOA->CRL &= ~GPIO_CRL_CNF1 & ~GPIO_CRL_MODE1;
     GPIOA->CRL |=  GPIO_CRL_MODE1_0;
 
-    GPIOA->CRL &= ~GPIO_CRL_CNF2;
+    GPIOA->CRL &= ~GPIO_CRL_CNF2 & ~GPIO_CRL_MODE2;
     GPIOA->CRL |=  GPIO_CRL_MODE2_0;
 
-    GPIOA->CRL &= ~GPIO_CRL_CNF3;
+    GPIOA->CRL &= ~GPIO_CRL_CNF3 & ~GPIO_CRL_MODE3;
     GPIOA->CRL |=  GPIO_CRL_MODE3_0;
 
 }
@@ -106,10 +106,10 @@ switch (tipopasos){
                 GPIOA->BSRR |= GPIO_BSRR_BR3;
             break;
             case 3:
-            GPIOA->BSRR |= GPIO_BSRR_BR0;
-            GPIOA->BSRR |= GPIO_BSRR_BS1;
-            GPIOA->BSRR |= GPIO_BSRR_BR2;
-            GPIOA->BSRR |= GPIO_BSRR_BR3;
+                GPIOA->BSRR |= GPIO_BSRR_BR0;
+                GPIOA->BSRR |= GPIO_BSRR_BS1;
+                GPIOA->BSRR |= GPIO_BSRR_BR2;
+                GPIOA->BSRR |= GPIO_BSRR_BR3;
             break;
             case 4:
                 GPIOA->BSRR |= GPIO_BSRR_BR0;
