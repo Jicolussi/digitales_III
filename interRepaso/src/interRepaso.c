@@ -75,7 +75,5 @@ void EXTI3_IRQHandler(void){
     if (EXTI->PR & (1 << 3)){
         EXTI->PR |= (1 << 3);
         int num=0;
-        
-
     }
 }

@@ -26,5 +26,4 @@ void loop() {
     delay(1000);
     dec7seg(9);
     delay(1000);
-
 }
