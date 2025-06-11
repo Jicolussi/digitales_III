@@ -25,7 +25,8 @@ int main(void) {
     GPIOA->CRL |= (GPIO_CRL_MODE0_1 | GPIO_CRL_MODE1_1); 
     GPIOA->BRR = (1 << 0) | (1 << 1);
     TecladoMatri_init();
-}        
+}  
+      
 while (1) {
     char tecla = TecladoMatri();
     if (tecla !=0) {
